@@ -58,12 +58,15 @@ class Shape {
         }
 
         for (int i = 0; i < chord.length; i++) {
+            // THE 500 HERE CAN BE CHANGED TO MODULATE PITCH
             chord[i].freq(map(bias, 500, 0, major[i], minor[i]) * root);
         }
     }
 
     void drawPoly(int dx, int dy) {
         float g = 0;
+
+        // THE 20 HERE CAN BE CHANGED TO AFFECT THE VIBRATION OF EACH CIRCLE
         if (this.input.buttonPressed) g = random(-20, 20);
             
         beginShape();
@@ -118,7 +121,7 @@ class Shape {
         } else {
             for (int i = 0; i < chord.length; i++) {
                 // chord[i].amp(0.0);
-                chord[i].stop();
+                // chord[i].stop();
             }
         }
     }

@@ -17,8 +17,8 @@ void setup() {
     myPort = new Serial(this, Serial.list()[3], 115200);
 
 
-    size(1000, 1000);
-    // fullScreen();
+    // size(1000, 1000);
+    fullScreen();
     strokeWeight(12);
     noFill();
 
