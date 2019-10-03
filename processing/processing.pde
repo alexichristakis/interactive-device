@@ -1,7 +1,5 @@
 import processing.serial.*;
 
-
-
 Serial myPort;  // The serial port
 int NUM_SHAPES = 3;
 int RES = 200;
@@ -33,18 +31,12 @@ void setup() {
         userInputs[i] = new Input(center);
         shapes[i] = new Shape(this, center, 100, RES, userInputs[i]);
     }
-    
-    // shapes[0] = new Shape(this, width / 2.0, height / 3.0, 100, RES, userInputs[0]);
-    // shapes[1] = new Shape(this, width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[1]);
-    // shapes[2] = new Shape(this, 2.0 * width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[2]);
 }
 
 void parseInputs(String[] inputs) {
     switch1 = int(inputs[0]) > 0;
     switch2 = int(inputs[1]) > 0;
     switch3 = int(inputs[2]) > 0;
-
-    // printArray(inputs);
 
     int index = 0;
     for (int i = 3; i < inputs.length; i += 4) {
