@@ -20,8 +20,8 @@ class Shape {
     int[] major = { 4, 5, 6 };
     int[] minor = { 10, 12, 15 };
 
-    Shape(PApplet parent, float cx, float cy, float radius, int n, Input input) {
-        this.center = new Point(cx, cy);
+    Shape(PApplet parent, Point center, float radius, int n, Input input) {
+        this.center = center;
         this.radius = radius;   
         this.n = n;
         this.input = input;
@@ -68,10 +68,18 @@ class Shape {
             
         beginShape();
         for (int i = 0; i < n; i++) {
-            float bias = dist(input.joyX, input.joyY, poly[i].x, poly[i].y);
+            float bias = dist(this.input.joyX, this.input.joyY, poly[i].x, poly[i].y);
             vertex(
-                poly[i].x + dx / logMap(bias, (float) width, 0.0, (float) dx, 45.0) + g, 
-                poly[i].y + dy / logMap(bias, (float) height, 0.0, (float) dy, 45.0) + g
+                poly[i].x + dx / logMap(bias, 
+                                        (float) (this.center.x + width), 
+                                        (float) (this.center.x - width), 
+                                        (float) dx, 45.0
+                                        ) + g, 
+                poly[i].y + dy / logMap(bias, 
+                                        (float) (this.center.y + height), 
+                                        (float) (this.center.y - height), 
+                                        (float) dy, 45.0
+                                        ) + g
             );
         }
         endShape();

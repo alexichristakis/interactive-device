@@ -28,12 +28,15 @@ void setup() {
     shapes = new Shape[NUM_SHAPES];
 
     for (int i = 0; i < NUM_SHAPES; i++) {
-        userInputs[i] = new Input();
+        Point center = new Point(((i + 1) *width) / 4, height / 2.0);
+        
+        userInputs[i] = new Input(center);
+        shapes[i] = new Shape(this, center, 100, RES, userInputs[i]);
     }
     
-    shapes[0] = new Shape(this, width / 2.0, height / 3.0, 100, RES, userInputs[0]);
-    shapes[1] = new Shape(this, width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[1]);
-    shapes[2] = new Shape(this, 2.0 * width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[2]);
+    // shapes[0] = new Shape(this, width / 2.0, height / 3.0, 100, RES, userInputs[0]);
+    // shapes[1] = new Shape(this, width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[1]);
+    // shapes[2] = new Shape(this, 2.0 * width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[2]);
 }
 
 void parseInputs(String[] inputs) {
