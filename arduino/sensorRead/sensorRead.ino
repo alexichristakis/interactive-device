@@ -20,7 +20,7 @@ int joystick3Button = 12;
 
 void setup() {
   // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(switch1Pin, INPUT);
   pinMode(switch2Pin, INPUT);
   pinMode(switch3Pin, INPUT);
@@ -71,26 +71,24 @@ void loop() {
   Serial.print(button2Value);
   Serial.print(',');
   Serial.print(button3Value);
-  Serial.print("//");
+  Serial.print(",");
   Serial.print(joystick1XValue);
   Serial.print(",");
   Serial.print(joystick1YValue);
   Serial.print(",");
   Serial.print(joystick1ButtonValue);
-  Serial.print("//");
+  Serial.print(",");
   Serial.print(joystick2XValue);
   Serial.print(",");
   Serial.print(joystick2YValue);
   Serial.print(",");
   Serial.print(joystick2ButtonValue);
-  Serial.print("//");
+  Serial.print(",");
   Serial.print(joystick3XValue);
   Serial.print(",");
   Serial.print(joystick3YValue);
   Serial.print(",");
   Serial.println(joystick3ButtonValue);
-//  Serial.print(",");
-//  Serial.println(joystick3ButtonValue);
 
-  delay(1);        // delay in between reads for stability
+  delay(1);
 }
