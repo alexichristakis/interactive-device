@@ -23,18 +23,18 @@ class Input {
 
     void update(int joyX, int joyY, boolean joyPressed, boolean buttonPressed) {
         if (joyX >= restingX) {
-            this.joyX = map(joyX, restingX, 4095, this.center.x, this.center.x + width);
+            this.joyX = map(joyX, restingX, 4095, this.center.x, this.center.x + 150);
         } else {
-            this.joyX = map(joyX, 0, restingX, this.center.x - width, this.center.x);
+            this.joyX = map(joyX, 0, restingX, this.center.x - 150, this.center.x);
         }
 
         if (joyY >= restingY) {
-            this.joyY = map(joyY, restingY, 4095, this.center.y, this.center.y + height);
+            this.joyY = map(joyY, restingY, 4095, this.center.y, this.center.y + 150);
         } else {
-            this.joyY = map(joyY, 0, restingY, this.center.y - height, this.center.y);
+            this.joyY = map(joyY, 0, restingY, this.center.y - 150, this.center.y);
         }
 
-        println(joyX + " " + joyY);
+        println(this.joyX + " " + this.joyY);
 
         this.joyPressed = joyPressed;
         this.buttonPressed = buttonPressed;

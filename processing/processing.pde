@@ -26,10 +26,10 @@ void setup() {
     shapes = new Shape[NUM_SHAPES];
 
     for (int i = 0; i < NUM_SHAPES; i++) {
-        Point center = new Point(((i + 1) *width) / 4, height / 2.0);
+        Point center = new Point(((i + 1) * width) / 4, height / 2.0);
         
         userInputs[i] = new Input(center);
-        shapes[i] = new Shape(this, center, 100, RES, userInputs[i]);
+        shapes[i] = new Shape(this, center, 200, RES, userInputs[i]);
     }
 }
 
@@ -62,6 +62,6 @@ void draw() {
     }
     
     for (Shape shape : shapes) {
-        shape.display();
+        shape.display(switch1);
     }
 }

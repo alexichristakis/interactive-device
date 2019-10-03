@@ -58,13 +58,13 @@ class Shape {
         }
 
         for (int i = 0; i < chord.length; i++) {
-            chord[i].freq(map(bias, width, 0, major[i], minor[i]) * root);
+            chord[i].freq(map(bias, 500, 0, major[i], minor[i]) * root);
         }
     }
 
     void drawPoly(int dx, int dy) {
         float g = 0;
-        if (this.input.buttonPressed) g = random(-2, 2);
+        if (this.input.buttonPressed) g = random(-20, 20);
             
         beginShape();
         for (int i = 0; i < n; i++) {
@@ -72,12 +72,12 @@ class Shape {
             vertex(
                 poly[i].x + dx / logMap(bias, 
                                         (float) (this.center.x + width), 
-                                        (float) (this.center.x - width), 
+                                        (float) (0.0), 
                                         (float) dx, 45.0
                                         ) + g, 
                 poly[i].y + dy / logMap(bias, 
                                         (float) (this.center.y + height), 
-                                        (float) (this.center.y - height), 
+                                        (float) (0.0), 
                                         (float) dy, 45.0
                                         ) + g
             );
@@ -87,18 +87,28 @@ class Shape {
         warpOsc();
     }
 
-    void display() {
+    void display(boolean switch1) {
+        if (switch1) {
+            colorMode(HSB, 255);
+        } else {
+            colorMode(RGB);
+        }
+
         blendMode(ADD);
         stroke(255, 0, 0);
+        if (switch1) stroke(255, 255, 255);
+        
         drawPoly(1000, 1000);
         
         stroke(0, 255, 0);
+        if (switch1) stroke(200, 255, 255);
+
         drawPoly(1200, 1500);
         
         stroke(0, 0, 255);
-        drawPoly(2000, 1700);
+        if (switch1) stroke(100, 255, 255);
 
-        // print(this.input.buttonPressed);
+        drawPoly(2000, 1700);
 
         if (this.input.buttonPressed) {
             for (int i = 0; i < chord.length; i++) {
