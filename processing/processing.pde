@@ -1,33 +1,72 @@
+import processing.serial.*;
+
+
+
+Serial myPort;  // The serial port
 int NUM_SHAPES = 3;
 int RES = 200;
 Shape[] shapes;
-Input input;
+Input[] userInputs;
+
+boolean switch1 = false;
+boolean switch2 = false;
+boolean switch3 = false;
 
 void setup() {
-    // size(1000, 1000);
-    fullScreen();
+    // List all the available serial ports
+    printArray(Serial.list());
+    // Open the port you are using at the rate you want:
+    myPort = new Serial(this, Serial.list()[3], 115200);
+
+
+    size(1000, 1000);
+    // fullScreen();
     strokeWeight(12);
     noFill();
 
-    input = new Input();
-    
+    userInputs = new Input[NUM_SHAPES];
     shapes = new Shape[NUM_SHAPES];
-    shapes[0] = new Shape(this, width / 2.0, height / 3.0, 100, RES, input);
-    shapes[1] = new Shape(this, width / 3.0, 2.0 * height / 3.0, 100, RES, input);
-    shapes[2] = new Shape(this, 2.0 * width / 3.0, 2.0 * height / 3.0, 100, RES, input);
+
+    for (int i = 0; i < NUM_SHAPES; i++) {
+        userInputs[i] = new Input();
+    }
+    
+    shapes[0] = new Shape(this, width / 2.0, height / 3.0, 100, RES, userInputs[0]);
+    shapes[1] = new Shape(this, width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[1]);
+    shapes[2] = new Shape(this, 2.0 * width / 3.0, 2.0 * height / 3.0, 100, RES, userInputs[2]);
+}
+
+void parseInputs(String[] inputs) {
+    switch1 = int(inputs[0]) > 0;
+    switch2 = int(inputs[1]) > 0;
+    switch3 = int(inputs[2]) > 0;
+
+    // printArray(inputs);
+
+    int index = 0;
+    for (int i = 3; i < inputs.length; i += 4) {
+        userInputs[index++].update(
+            int(inputs[i]), 
+            int(inputs[i+1]), 
+            int(inputs[i+2]) > 0, 
+            int(inputs[i+3]) > 0
+        );
+    }
 }
 
 void draw() {
     background(0);
+
+    while (myPort.available() > 0) {
+        String inputString = myPort.readStringUntil('\n');
+        if (inputString != null && inputString.length() > 1) {
+            String[] inputs = inputString.split(",");
+            // print(inputs.length);
+            if (inputs.length == 15) parseInputs(inputs);
+        }
+    }
+    
     for (Shape shape : shapes) {
         shape.display();
     }
-}
-
-void mousePressed() {
-    input.pressMouse();
-}
-
-void mouseReleased() {
-    input.releaseMouse();
 }

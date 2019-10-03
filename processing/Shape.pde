@@ -54,7 +54,7 @@ class Shape {
     void warpOsc() {
         float bias = 0;
         for (int i = 0; i < n; i++) {
-            bias = max(bias, dist(mouseX, mouseY, poly[i].x, poly[i].y));
+            bias = max(bias, dist(this.input.joyX, this.input.joyY, poly[i].x, poly[i].y));
         }
 
         for (int i = 0; i < chord.length; i++) {
@@ -64,11 +64,11 @@ class Shape {
 
     void drawPoly(int dx, int dy) {
         float g = 0;
-        if (input.mousePressed) g = random(-2, 2);
+        if (this.input.buttonPressed) g = random(-2, 2);
             
         beginShape();
         for (int i = 0; i < n; i++) {
-            float bias = dist(mouseX, mouseY, poly[i].x, poly[i].y);
+            float bias = dist(input.joyX, input.joyY, poly[i].x, poly[i].y);
             vertex(
                 poly[i].x + dx / logMap(bias, (float) width, 0.0, (float) dx, 45.0) + g, 
                 poly[i].y + dy / logMap(bias, (float) height, 0.0, (float) dy, 45.0) + g
@@ -90,14 +90,16 @@ class Shape {
         stroke(0, 0, 255);
         drawPoly(2000, 1700);
 
-        if (input.mousePressed) {
+        // print(this.input.buttonPressed);
+
+        if (this.input.buttonPressed) {
             for (int i = 0; i < chord.length; i++) {
                 chord[i].play();
                 chord[i].amp(0.3);
             }
         } else {
             for (int i = 0; i < chord.length; i++) {
-                chord[i].amp(0.0);
+                // chord[i].amp(0.0);
                 chord[i].stop();
             }
         }
