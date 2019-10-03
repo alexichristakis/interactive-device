@@ -66,8 +66,11 @@ class Shape {
     void drawPoly(int dx, int dy) {
         float g = 0;
 
-        // THE 20 HERE CAN BE CHANGED TO AFFECT THE VIBRATION OF EACH CIRCLE
-        if (this.input.buttonPressed) g = random(-20, 20);
+        if (this.input.buttonPressed) {
+            int distortionAmount = !this.input.joyPressed ? 20 : 10;
+        
+            g = random(-distortionAmount, distortionAmount);
+        }
             
         beginShape();
         for (int i = 0; i < n; i++) {

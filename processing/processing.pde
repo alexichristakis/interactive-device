@@ -17,8 +17,8 @@ void setup() {
     myPort = new Serial(this, Serial.list()[3], 115200);
 
 
-    // size(1000, 1000);
-    fullScreen();
+    size(1000, 1000);
+    // fullScreen();
     strokeWeight(12);
     noFill();
 
@@ -28,7 +28,7 @@ void setup() {
     for (int i = 0; i < NUM_SHAPES; i++) {
         Point center = new Point(((i + 1) * width) / 4, height / 2.0);
         
-        userInputs[i] = new Input(center);
+        userInputs[i] = new Input(i, center);
         shapes[i] = new Shape(this, center, 200, RES, userInputs[i]);
     }
 }

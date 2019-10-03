@@ -1,14 +1,16 @@
 class Input {
+    int index;
     int initializeCounter = 0;
     Point center;
     float restingX, restingY;
     float joyX, joyY;
     boolean joyPressed, buttonPressed;
 
-    Input(Point center) {
+    Input(int index, Point center) {
+        this.index = index;
         this.center = center;
 
-        this.restingX = 2600;
+        this.restingX = 2700;
         this.restingY = 2700;
         this.joyX = 0;
         this.joyY = 0;
@@ -34,7 +36,10 @@ class Input {
             this.joyY = map(joyY, 0, restingY, this.center.y - 150, this.center.y);
         }
 
-        println(this.joyX + " " + this.joyY);
+        // println(this.joyX + " " + this.joyY);
+
+        if (!joyPressed) println(this.index + " joy pressed");
+        if (!buttonPressed) println(this.index + " button pressed");
 
         this.joyPressed = joyPressed;
         this.buttonPressed = buttonPressed;
