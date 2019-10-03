@@ -28,9 +28,6 @@ void setup() {
   pinMode(button2Pin, INPUT);
   pinMode(button3Pin, INPUT);
 
-  pinMode(joystick1X, INPUT);
-  pinMode(joystick1Y, INPUT);
-
   pinMode(joystick1Button, INPUT_PULLUP);
   pinMode(joystick2Button, INPUT_PULLUP);
   pinMode(joystick3Button, INPUT_PULLUP);
@@ -66,29 +63,33 @@ void loop() {
   Serial.print(',');
   Serial.print(switch3Value);
   Serial.print(',');
+
+  Serial.print(joystick1XValue);
+  Serial.print(',');
+  Serial.print(joystick1YValue);
+  Serial.print(',');
+  Serial.print(joystick1ButtonValue);
+  Serial.print(',');
   Serial.print(button1Value);
+  Serial.print(',');
+
+
+  Serial.print(joystick2XValue);
+  Serial.print(',');
+  Serial.print(joystick2YValue);
+  Serial.print(',');
+  Serial.print(joystick2ButtonValue);
   Serial.print(',');
   Serial.print(button2Value);
   Serial.print(',');
-  Serial.print(button3Value);
-  Serial.print(",");
-  Serial.print(joystick1XValue);
-  Serial.print(",");
-  Serial.print(joystick1YValue);
-  Serial.print(",");
-  Serial.print(joystick1ButtonValue);
-  Serial.print(",");
-  Serial.print(joystick2XValue);
-  Serial.print(",");
-  Serial.print(joystick2YValue);
-  Serial.print(",");
-  Serial.print(joystick2ButtonValue);
-  Serial.print(",");
-  Serial.print(joystick3XValue);
-  Serial.print(",");
-  Serial.print(joystick3YValue);
-  Serial.print(",");
-  Serial.println(joystick3ButtonValue);
 
-  delay(1);
+  Serial.print(joystick3XValue);
+  Serial.print(',');
+  Serial.print(joystick3YValue);
+  Serial.print(',');
+  Serial.print(joystick3ButtonValue);
+  Serial.print(',');
+  Serial.println(button3Value);
+
+  delay(5);
 }
