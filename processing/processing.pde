@@ -11,14 +11,14 @@ boolean switch2 = false;
 boolean switch3 = false;
 
 void setup() {
-    // List all the available serial ports
+    // List all the available serial port
     printArray(Serial.list());
     // Open the port you are using at the rate you want:
-    myPort = new Serial(this, Serial.list()[3], 115200);
+    myPort = new Serial(this, Serial.list()[2], 115200);
 
 
-    size(1000, 1000);
-    // fullScreen();
+    // size(1000, 1000);
+    fullScreen();
     strokeWeight(12);
     noFill();
 
@@ -50,7 +50,19 @@ void parseInputs(String[] inputs) {
 }
 
 void draw() {
-    background(0);
+    int R = 0;
+    int G = 0;
+    int B = 0;
+    if (switch1) {
+      R = 255;
+    }
+    if (switch2) {
+      G = 255;
+    }
+    if (switch3) {
+      B = 255;
+    }
+    background(R, G, B);
 
     while (myPort.available() > 0) {
         String inputString = myPort.readStringUntil('\n');
